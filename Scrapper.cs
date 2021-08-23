@@ -17,7 +17,7 @@ namespace kdown
             string threadId = html.DocumentNode.Descendants("div").Where(d => d.HasClass("thread")).FirstOrDefault().Id;
             for(int i = 0;i < urls.Length;i++)
             {
-                model.urls.Add(urls[i]);
+                model.urls.Add("https:" + urls[i]);
                 if(fileName[i] != null) //im not too sure if we will get a filename everytime from the html
                     model.filename.Add(fileName[i]);
             }

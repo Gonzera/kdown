@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Net.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+
 
 namespace kdown
 {
@@ -24,7 +21,8 @@ namespace kdown
             {
                 System.Console.WriteLine("1 - FourChan");
                 System.Console.WriteLine("2 - Reddit");
-                choice = Convert.ToInt32(Console.ReadKey(true));
+                System.Console.WriteLine("3 - Leave :(");
+                choice = int.Parse(Console.ReadKey(true).KeyChar.ToString());
                 System.Console.WriteLine("Enter the target Url: ");
                 url = Convert.ToString(Console.ReadLine());
                 switch(choice)
@@ -36,6 +34,9 @@ namespace kdown
                     case 2:
                         DownloadModel redditModel = redditScrapper.RedditModel(url, 50);
                         Downloader.Download(redditModel);
+                        break;
+                    case 3:
+                        exit = true;
                         break;
                     default:
                         System.Console.WriteLine("1 or 2 :(");
