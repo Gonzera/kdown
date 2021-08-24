@@ -23,15 +23,18 @@ namespace kdown
                 System.Console.WriteLine("2 - Reddit");
                 System.Console.WriteLine("3 - Leave :(");
                 choice = int.Parse(Console.ReadKey(true).KeyChar.ToString());
-                System.Console.WriteLine("Enter the target Url: ");
-                url = Convert.ToString(Console.ReadLine());
+
                 switch(choice)
                 {
                     case 1:
+                        System.Console.Write("Enter the target Url: ");
+                        url = Convert.ToString(Console.ReadLine());
                         DownloadModel fourmodel = scrapper.FourChan(url);
                         Downloader.Download(fourmodel);
                         break;
                     case 2:
+                        System.Console.Write("Enter the target Url: ");
+                        url = Convert.ToString(Console.ReadLine());
                         DownloadModel redditModel = redditScrapper.RedditModel(url, 50);
                         Downloader.Download(redditModel);
                         break;

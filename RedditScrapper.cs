@@ -10,11 +10,11 @@ namespace kdown
     {
          public DownloadModel RedditModel(string url, int depth)
          {
-             string r = "/r/";
              DownloadModel model = ParseJson(depth, url);
+             string[] splited = url.Split("/r/");
 
              model.website = "Reddit";
-             model.folder = url.Substring(url.LastIndexOfAny(r.ToCharArray()) + 1);
+             model.folder = splited[1].Replace("/", ""); 
 
              return model;
          }

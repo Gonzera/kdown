@@ -20,7 +20,7 @@ namespace kdown
                 if(model.urls[i] != null && !bDownloaded(model.urls[i]))
                 {
                     if(model.website == "Reddit")
-                        model.urls[i].Replace("amp;", ""); //weird bug with reddit previews url
+                        model.urls[i] = model.urls[i].Replace("amp;", ""); //weird bug with reddit previews url
                     fullPath = path  + "/" + model.filename[i];
                     web.DownloadFile(model.urls[i], fullPath);
                     LogUrl(model.urls[i]);
