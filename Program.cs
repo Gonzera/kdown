@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 
 namespace kdown
 {
@@ -7,6 +7,9 @@ namespace kdown
     {
         static void Main(string[] args)
         {
+            if(!File.Exists(".downloadedUrls.txt"))   //the file used to keep track of what we already downloaded
+                File.CreateText(".downloadedUrls.txt");
+
             Menu();
         }
 
@@ -21,7 +24,8 @@ namespace kdown
             {
                 System.Console.WriteLine("1 - FourChan");
                 System.Console.WriteLine("2 - Reddit");
-                System.Console.WriteLine("3 - Leave :(");
+                System.Console.WriteLine("3 - 1500Chan");
+                System.Console.WriteLine("0 - Leave :(");
                 choice = int.Parse(Console.ReadKey(true).KeyChar.ToString());
 
                 switch(choice)
@@ -39,6 +43,12 @@ namespace kdown
                         Downloader.Download(redditModel);
                         break;
                     case 3:
+                        System.Console.Write("Enter the target Url: ");
+                        url = Convert.ToString(Console.ReadLine());
+                        DownloadModel caravela = scrapper.Caravela(url);
+                        Downloader.Download(caravela);
+                        break;
+                    case 0:
                         exit = true;
                         break;
                     default:
@@ -49,3 +59,15 @@ namespace kdown
         }
     }
 }
+
+
+
+
+/*
+TODO LIST:
+Reddit Gallery Support/subfolders
+Url queue/load multiple urls
+1500chan support - Done
+MultiThreading
+
+*/
