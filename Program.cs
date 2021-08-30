@@ -26,6 +26,7 @@ namespace kdown
                 System.Console.WriteLine("2 - Reddit");
                 System.Console.WriteLine("3 - 1500Chan");
                 System.Console.WriteLine("4 - Erome Gallery");
+                System.Console.WriteLine("5 - Erome Profile");
                 System.Console.WriteLine("0 - Leave :(");
                 choice = int.Parse(Console.ReadKey(true).KeyChar.ToString());
 
@@ -50,6 +51,10 @@ namespace kdown
                         url = GetInput();
                         DownloadModel ero = scrapper.EromeGallery(url);
                         Downloader.Download(ero);
+                        break;
+                    case 5:
+                        url = GetInput();
+                        Navigator.EromeProfile(url);
                         break;
                     case 0:
                         exit = true;
