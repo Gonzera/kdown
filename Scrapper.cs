@@ -48,6 +48,23 @@ namespace kdown
             return model;
         }
         
+        public DownloadModel EromeGallery(string target)
+        {
+            var model = new DownloadModel(){urls = new List<string>(), filename = new List<string>()};
+            var html = new HtmlWeb().Load(target);   
+            var imgUrls = html.DocumentNode.Descendants().Where(s => s.HasClass("img")).Select(d =>  d.GetAttributeValue("data-src", null)).ToArray();
+            var videoUrls = html.DocumentNode.Descendants().Where(s => s.GetAttributeValue("type", null) == "video/mp4").Select(d => d.GetAttributeValue("src", null)).Distinct().ToArray();
+            model.folder = html.DocumentNode.Descendants("h1").Where(s => s.ParentNode.HasClass("col-sm-12")).FirstOrDefault().InnerText;
+            for(int i = 0; i < imgUrls.Length; i++)
+            {
+                if(imgUrls[i] != null)
+                    model.urls.Add(imgUrls[i]); 
+            }
+
+            model.urls.AddRange(videoUrls);
+            model.website = "Erome";
+            return model;
+        }
 
     }
 }

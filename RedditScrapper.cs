@@ -6,8 +6,8 @@ using Newtonsoft.Json.Linq;
 
 namespace kdown
 {
-    public class RedditScrapper
-    {
+    public class RedditScrapper //we need to use some json parsing for reddit
+    {                           //so it will get it's scrapper
          public DownloadModel RedditModel(string url, int depth)
          {
              DownloadModel model = ParseJson(depth, url);
@@ -29,7 +29,7 @@ namespace kdown
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             var response = new HttpClient().Send(request);
-            var content = response.Content.ReadAsStringAsync();
+            var content = response.Content.ReadAsStringAsync(); 
             var resul = JObject.Parse(JsonConvert.SerializeObject(content));
             return resul;
         }
@@ -67,7 +67,8 @@ namespace kdown
                     }
                 }
                 after = json["data"]["after"].ToString();
-                if(after == "" && count > 0){break;} //if we hit the end before depth ends we break the loop
+                if(after == "" && count > 0)
+                    break;//if we hit the end before depth ends we break the loop
                 count++;
                 Thread.Sleep(2000);
             }while(count <= depth);

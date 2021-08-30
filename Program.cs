@@ -25,28 +25,31 @@ namespace kdown
                 System.Console.WriteLine("1 - FourChan");
                 System.Console.WriteLine("2 - Reddit");
                 System.Console.WriteLine("3 - 1500Chan");
+                System.Console.WriteLine("4 - Erome Gallery");
                 System.Console.WriteLine("0 - Leave :(");
                 choice = int.Parse(Console.ReadKey(true).KeyChar.ToString());
 
                 switch(choice)
                 {
                     case 1:
-                        System.Console.Write("Enter the target Url: ");
-                        url = Convert.ToString(Console.ReadLine());
+                        url = GetInput();
                         DownloadModel fourmodel = scrapper.FourChan(url);
                         Downloader.Download(fourmodel);
                         break;
                     case 2:
-                        System.Console.Write("Enter the target Url: ");
-                        url = Convert.ToString(Console.ReadLine());
+                        url = GetInput();
                         DownloadModel redditModel = redditScrapper.RedditModel(url, 50);
                         Downloader.Download(redditModel);
                         break;
                     case 3:
-                        System.Console.Write("Enter the target Url: ");
-                        url = Convert.ToString(Console.ReadLine());
+                        url = GetInput();
                         DownloadModel caravela = scrapper.Caravela(url);
                         Downloader.Download(caravela);
+                        break;
+                    case 4:
+                        url = GetInput();
+                        DownloadModel ero = scrapper.EromeGallery(url);
+                        Downloader.Download(ero);
                         break;
                     case 0:
                         exit = true;
@@ -57,6 +60,14 @@ namespace kdown
                 }
             }
         }
+
+        static string GetInput()
+        {
+            string url;
+            System.Console.Write("Enter the target Url: ");
+            url = Convert.ToString(Console.ReadLine());
+            return url;
+        }
     }
 }
 
@@ -66,8 +77,11 @@ namespace kdown
 /*
 TODO LIST:
 Reddit Gallery Support/subfolders
+
 Url queue/load multiple urls
-1500chan support - Done
 MultiThreading
+Identify website from url
+Remove menu and get stuff from parameters 
+
 
 */
